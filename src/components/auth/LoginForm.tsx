@@ -35,10 +35,30 @@ export default function LoginForm() {
   });
 
   const onSubmit = async (data: LoginSchema) => {
-    // Navigate or API call here
-    console.log("Login Data:", data);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        // Handle error (e.g. show toast or alert)
+        console.error("Login failed");
+        return;
+      }
+
+      const result = await response.json();
+      console.log("Login success:", result);
+
+      // Force reload or redirect to allow middleware to handle the new cookie
+      window.location.href = result.role ? `/${result.role}` : "/";
+
+    } catch (error) {
+      console.error("An error occurred during login:", error);
+    }
   };
 
   return (

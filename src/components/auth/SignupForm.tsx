@@ -35,9 +35,29 @@ export default function SignupForm() {
   });
 
   const onSubmit = async (data: SignupSchema) => {
-    console.log("Signup Data:", data);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        console.error("Signup failed");
+        return;
+      }
+
+      const result = await response.json();
+      console.log("Signup success:", result);
+
+      // Force reload or redirect
+      window.location.href = "/";
+
+    } catch (error) {
+      console.error("An error occurred during signup:", error);
+    }
   };
 
   return (

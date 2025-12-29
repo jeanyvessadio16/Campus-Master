@@ -33,23 +33,28 @@ export default function Home() {
           </div>
         </section>
         {/* About Campus Master */}
-        <section className="p-10">
-          <div className="grid md:grid-cols-3 gap-5 my-10 place-content-between place-items-center">
-            {whyCampusMaster.map((item, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <item.icons className={`w-8 h-8 ${item.color}`} />
-                </CardHeader>
-                <CardContent>
-                  <CardTitle className="text-2xl font-bold">
-                    {item.title}
-                  </CardTitle>
-                  <CardDescription className="text-gray-600">
-                    {item.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            ))}
+        <section id="about">
+          <div className="p-10">
+            <h2 className="text-3xl text-slate-800 md:text-4xl font-bold text-center mb-10">
+              A propos de Campus Master
+            </h2>
+            <div className="grid md:grid-cols-3 gap-5 my-10 place-content-between place-items-center">
+              {whyCampusMaster.map((item, index) => (
+                <Card key={index}>
+                  <CardHeader>
+                    <item.icons className={`w-8 h-8 ${item.color}`} />
+                  </CardHeader>
+                  <CardContent>
+                    <CardTitle className="text-2xl font-bold">
+                      {item.title}
+                    </CardTitle>
+                    <CardDescription className="text-gray-600">
+                      {item.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </section>
       </main>
