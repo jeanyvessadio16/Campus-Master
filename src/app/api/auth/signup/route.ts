@@ -5,8 +5,8 @@ export async function POST(request: Request) {
         const body = await request.json();
         const { email, password, prenom, nom } = body;
 
-        // Mock registration logic
-        // Determine role based on email keyword or default to student
+        // Logique d'inscription factice
+        // Déterminer le rôle basé sur le mot-clé dans l'email ou par défaut étudiant
         let role = "student";
         if (email.includes("admin")) {
             role = "admin";
@@ -14,16 +14,16 @@ export async function POST(request: Request) {
             role = "teacher";
         }
 
-        // Set cookie to auto-login after signup
+        // Définir le cookie pour une connexion automatique après l'inscription
         const response = NextResponse.json({
-            message: "Signup successful",
+            message: "Inscription réussie",
             user: { name: `${prenom} ${nom}`, email, role }
         });
 
         response.cookies.set("role", role, {
             httpOnly: true,
             path: "/",
-            maxAge: 60 * 60 * 24 * 7, // 1 week
+            maxAge: 60 * 60 * 24 * 7, // 1 semaine
         });
 
         return response;

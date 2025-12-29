@@ -5,9 +5,9 @@ export async function POST(request: Request) {
         const body = await request.json();
         const { email, password } = body;
 
-        // Mock authentication logic
-        // In a real application, you would check against a database
-        let role = "student"; // Default mock role
+        // Logique d'authentification factice
+        // Dans une application réelle, vous vérifieriez dans une base de données
+        let role = "student"; // Rôle par défaut
 
         if (email.includes("admin")) {
             role = "admin";
@@ -16,29 +16,29 @@ export async function POST(request: Request) {
         } else if (email.includes("student")) {
             role = "student";
         } else {
-            // For testing/mock purposes, assign role based on email content or default to student
-            // If credentials are invalid, return error.
-            // For this demo: invalid if password is short (just as an example) or empty
+            // Pour les besoins de test/simulation, attribuer un rôle basé sur le contenu de l'email ou par défaut étudiant
+            // Si les identifiants sont invalides, renvoyer une erreur.
+            // Pour cette démo : invalide si le mot de passe est court (juste comme exemple) ou vide
             if (!password || password.length < 1) {
                 return NextResponse.json(
-                    { message: "Invalid credentials" },
+                    { message: "Identifiants invalides" },
                     { status: 401 }
                 );
             }
         }
 
-        // Set cookie
-        // In production, use "Secure; HttpOnly; SameSite=Strict"
+        // Définir le cookie
+        // En production, utiliser "Secure; HttpOnly; SameSite=Strict"
         const response = NextResponse.json({
-            message: "Login successful",
+            message: "Connexion réussie",
             role: role,
-            user: { name: "Test User", email, role }
+            user: { name: "Utilisateur Test", email, role }
         });
 
         response.cookies.set("role", role, {
             httpOnly: true,
             path: "/",
-            maxAge: 60 * 60 * 24 * 7, // 1 week
+            maxAge: 60 * 60 * 24 * 7, // 1 semaine
         });
 
         return response;

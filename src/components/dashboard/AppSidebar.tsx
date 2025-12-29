@@ -18,7 +18,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         return <AdminSidebar {...props} />
     }
 
-    // Default to student sidebar (e.g. for /student or generic dashboard paths)
-    // You can also add more specific checks or a generic fallback if needed.
+    // Par défaut, barre latérale étudiant (par ex. pour /student ou des chemins génériques)
+    // Vous pouvez également ajouter des vérifications plus spécifiques ou une solution de repli générique si nécessaire.
     return <StudentSidebar {...props} />
 }
