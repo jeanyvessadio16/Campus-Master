@@ -1,9 +1,15 @@
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-    const response = NextResponse.json({ message: "Logout successful" });
+  const response = NextResponse.json({
+    message: "Déconnexion réussie",
+    success: true,
+  });
 
-    response.cookies.delete("role");
+  // Supprimer tous les cookies d'authentification
+  response.cookies.delete("role");
+  response.cookies.delete("token");
+  response.cookies.delete("session");
 
-    return response;
+  return response;
 }
