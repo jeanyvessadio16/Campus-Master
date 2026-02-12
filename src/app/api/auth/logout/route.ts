@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(_request: NextRequest) {
   const response = NextResponse.json({
     message: "Déconnexion réussie",
     success: true,
